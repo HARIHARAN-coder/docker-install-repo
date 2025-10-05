@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Netflix‑style Landing</title>
+  <meta name="description" content="A Netflix‑style landing page with hero background image and email signup." />
+  <style>
+    :root{
+      --bg-hero: url('images/netflix-hero.jpg'); /* 👈 Put your Netflix image here */
+      --ink: #e5e5e5;
+      --ink-dim: #b3b3b3;
+      --ink-strong: #fff;
+      --brand: #e50914;
+      --card: rgba(0,0,0,.65);
+      --page-bg: #000;  
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--page-bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+
+    /* ====== NAV ====== */
+    .nav{position:relative;z-index:5;max-width:1200px;margin:0 auto;padding:24px 20px;display:flex;align-items:center;justify-content:space-between}
+    .logo img{height:32px}
+    .lang, .signin{border:1px solid #666;background:transparent;color:var(--ink-strong);padding:8px 12px;border-radius:6px}
+    .signin{background:var(--brand);border-color:var(--brand);margin-left:10px}
+
+    /* ====== HERO ====== */
+    .hero{position:relative;min-height:88vh;display:grid;place-items:center;text-align:center}
+    .hero::before{content:"";position:absolute;inset:0;background-image:var(--bg-hero);background-position:center;background-size:cover;filter:brightness(.45)}
+    .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(75% 55% at 50% 0%, rgba(0,0,0,.3) 0%, rgba(0,0,0,.75) 100%)}
+    .hero-inner{position:relative;z-index:1;max-width:900px;padding:0 20px}
+    h1{font-size:clamp(28px,4vw,48px);line-height:1.1;color:var(--ink-strong);margin:0 0 16px}
+    .subtitle{font-size:clamp(16px,2.2vw,22px);margin:0 0 22px;color:var(--ink)}
+    .cta{font-size:18px;color:var(--ink-dim);margin:0 0 14px}
+
+    .email-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .email-row input{min-width:300px;max-width:420px;width:100%;padding:16px 14px;border-radius:6px;border:1px solid #666;background:rgba(20,20,20,.7);color:var(--ink-strong);font-size:16px}
+    .btn{background:var(--brand);border:0;color:white;padding:16px 22px;border-radius:6px;font-weight:700;cursor:pointer}
+    .btn:hover{filter:brightness(1.05)}
+
+    /* ====== FEATURE ROWS ====== */
+    .section{border-top:8px solid #222}
+    .feature{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center;max-width:1200px;margin:0 auto;padding:70px 20px}
+    .feature:nth-child(even){grid-template-columns:.9fr 1.1fr}
+    .feature h2{font-size:clamp(24px,3.2vw,36px);color:var(--ink-strong);margin:0 0 10px}
+    .feature p{color:var(--ink);font-size:clamp(14px,2vw,18px);margin:0}
+    .card{background:var(--card);border:1px solid #333;border-radius:12px;padding:24px}
+    .mock{width:100%;aspect-ratio:16/9;background:#111;border:1px solid #333;border-radius:12px}
+
+    @media (max-width:900px){
+      .feature{grid-template-columns:1fr}
+    }
+
+    /* ====== FAQ ====== */
+    .faq{border-top:8px solid #222;padding:70px 20px}
+    .faq .wrap{max-width:900px;margin:0 auto}
+    .faq h2{font-size:clamp(24px,3.2vw,36px);color:var(--ink-strong);text-align:center;margin:0 0 24px}
+    .accordion{display:grid;gap:12px}
+    details{background:#2b2b2b;color:#fff;border-radius:8px}
+    summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:600}
+    summary::-webkit-details-marker{display:none}
+    details[open] summary{background:#3a3a3a;border-radius:8px 8px 0 0}
+    details .content{padding:18px 20px;color:#ddd}
+
+    /* ====== FOOTER ====== */
+    footer{border-top:8px solid #222;color:#8d8d8d;max-width:1200px;margin:0 auto;padding:30px 20px;font-size:14px}
+    .links{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .links a{color:#8d8d8d;text-decoration:none}
+    .links a:hover{text-decoration:underline}
+    @media (max-width:800px){.links{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav" role="navigation" aria-label="Primary">
+    <div class="logo">
+      <img src="images/netflix-logo.png" alt="Netflix Logo" />
+    </div>
+    <div>
+      <select class="lang" aria-label="Choose language">
+        <option>English</option>
+        <option>हिन्दी</option>
+        <option>தமிழ்</option>
+      </select>
+      <button class="signin">Sign In</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Unlimited movies, TV shows and more.</h1>
+      <p class="subtitle">Watch anywhere. Cancel anytime.</p>
+      <p class="cta">Ready to watch? Enter your email to create or restart your membership.</p>
+      <form class="email-row" onsubmit="event.preventDefault(); alert('Thanks! We\\'ll email you.');">
+        <input type="email" placeholder="Email address" required />
+        <button class="btn" type="submit">Get Started ▶</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FEATURE ROWS -->
+  <div class="section">
+    <div class="feature">
+      <div>
+        <h2>Enjoy on your TV.</h2>
+        <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu‑ray players and more.</p>
+      </div>
+      <div class="card"><div class="mock" aria-hidden="true"></div></div>
+    </div>
+
+    <div class="feature">
+      <div class="card"><div class="mock" aria-hidden="true"></div></div>
+      <div>
+        <h2>Download your shows to watch offline.</h2>
+        <p>Save your favourites easily and always have something to watch.</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div>
+        <h2>Watch everywhere.</h2>
+        <p>Stream unlimited movies and TV shows on your phone, tablet, laptop and TV.</p>
+      </div>
+      <div class="card"><div class="mock" aria-hidden="true"></div></div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="wrap">
+      <h2>Frequently Asked Questions</h2>
+      <div class="accordion">
+        <details>
+          <summary>What is Netflix?</summary>
+          <div class="content">Netflix is a streaming service that offers a wide variety of award‑winning TV shows, movies, anime, documentaries and more.</div>
+        </details>
+        <details>
+          <summary>How much does Netflix cost?</summary>
+          <div class="content">Plans range by region. Replace this with your own pricing if you're building a clone for learning.</div>
+        </details>
+        <details>
+          <summary>Where can I watch?</summary>
+          <div class="content">Watch anywhere, anytime on an unlimited number of devices.</div>
+        </details>
+      </div>
+
+      <form class="email-row" style="margin-top:28px" onsubmit="event.preventDefault(); alert('Thanks! We\\'ll email you.');">
+        <input type="email" placeholder="Email address" required />
+        <button class="btn" type="submit">Get Started ▶</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="links" aria-label="Footer links">
+      <a href="#">FAQ</a>
+      <a href="#">Help Centre</a>
+      <a href="#">Account</a>
+      <a href="#">Media Centre</a>
+      <a href="#">Investor Relations</a>
+      <a href="#">Jobs</a>
+      <a href="#">Ways to Watch</a>
+      <a href="#">Terms of Use</a>
+    </div>
+    <p style="margin-top:20px">*This is a Netflix‑style demo page for educational use. Replace logos/marks if deploying publicly.</p>
+  </footer>
+
+</body>
+</html>
+
